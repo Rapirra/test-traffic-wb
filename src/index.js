@@ -46,12 +46,13 @@ class DataFetcher {
      * @param {number} intervalMs - The interval time in milliseconds.
      */
     startPeriodicFetching(intervalMs = 60 * 60 * 1000) {
-        this.start(); // Run immediately
+        this.start();
         setInterval(() => {
+            console.log('interval', intervalMs);
             this.start();
         }, intervalMs);
     }
 }
 
 const dataFetcher = new DataFetcher();
-dataFetcher.startPeriodicFetching();
+dataFetcher.startPeriodicFetching(60 * 60 * 1000);
