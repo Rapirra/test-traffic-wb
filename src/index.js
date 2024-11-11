@@ -1,40 +1,33 @@
-import axios from 'axios';
-import { updateOrInsertTariffs } from '#services/tariffsService.js';
-import dotenv from 'dotenv';
+import { TariffDataService } from '#services/tariff-data-service.js';
 
-dotenv.config();
+/** Handles the data fetching process and allows periodic execution. */
+const DataFetcher = {
+    /**
+     * Main method to start the data fetching process and handle errors.
+     *
+     * @async
+     */
+    async start() {
+        try {
+            console.log('Starting the data fetching process...');
+            await TariffDataService.fetchAndProcessTariffData();
+            console.log('Data fetching and processing completed successfully.');
+        } catch (error) {
+            console.error('Error in main process:', error);
+        }
+    },
 
-function fetchTariffData() {
-    const appUrl = process.env.API_WB_ENDPOINT;
-    const apiKey = process.env.API_WB_KEY;
-    if (appUrl === undefined || apiKey === undefined) return;
-    const today = new Date().toISOString().split('T')[0];
-    // console.log(`Fetching tariff data from ${apiKey}`, appUrl);
+    /**
+     * Sets up a periodic task to fetch data every hour.
+     *
+     * @param {number} intervalMs - The interval time in milliseconds.
+     */
+    startPeriodicFetching(intervalMs = 60 * 60 * 1000) {
+        this.start(); // Run immediately
+        setInterval(() => {
+            this.start();
+        }, intervalMs);
+    },
+};
 
-    return axios
-        .get(appUrl, {
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-            },
-            params: {
-                date: today,
-            },
-        })
-        .then((response) => {
-            console.log('response, response.data', response.data);
-            const data = response.data;
-            return updateOrInsertTariffs(data?.response?.data);
-        })
-        .catch((error) => {
-            console.error('Ошибка при получении данных:', error);
-        });
-}
-
-fetchTariffData();
-//
-// setInterval(
-//     () => {
-//         fetchTariffData();
-//     },
-//     60 * 60 * 1000,
-// );
+DataFetcher.startPeriodicFetching();
