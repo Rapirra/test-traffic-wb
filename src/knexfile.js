@@ -23,4 +23,3 @@ export default {
         max: 10,
     },
 };
-console.log('DB_PASSWORD:', process.env.DBPASSWORD);
