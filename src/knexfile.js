@@ -13,7 +13,7 @@ export default {
     },
     migrations: {
         tableName: 'knex_migrations',
-        directory: './migrations',
+        directory: './src/migrations',
     },
     seeds: {
         directory: './seeds',

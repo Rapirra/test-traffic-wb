@@ -2,7 +2,17 @@ import axios from 'axios';
 import knexDb from '#knexDB.js';
 import { GoogleSheetsService } from '#services/google-sheets-service.js';
 
-export const TariffDataService = {
+export class TariffDataService {
+    /**
+     * Creates an instance of TariffDataService.
+     *
+     * @class
+     */
+    constructor() {
+        this.appUrl = process.env.API_WB_ENDPOINT;
+        this.apiKey = process.env.API_WB_KEY;
+        this.googleSheetsService = new GoogleSheetsService();
+    }
     /**
      * Main method to fetch data from the API and handle database and Google Sheets operations.
      *
@@ -11,39 +21,50 @@ export const TariffDataService = {
      * @returns {Promise<void>}
      */
     async fetchAndProcessTariffData() {
-        const appUrl = process.env.API_WB_ENDPOINT;
-        const apiKey = process.env.API_WB_KEY;
-        if (!appUrl || !apiKey) return;
+        if (!this.appUrl || !this.apiKey) return;
 
         const today = new Date().toISOString().split('T')[0];
 
         try {
-            const response = await axios.get(appUrl, {
+            const response = await axios.get(this.appUrl, {
                 headers: {
-                    'Authorization': `Bearer ${apiKey}`,
+                    'Authorization': `Bearer ${this.apiKey}`,
                 },
                 params: {
                     date: today,
                 },
             });
-
-            console.log('response.data', response.data);
             const data = response.data;
 
             if (data?.response?.data) {
                 const formattedData = await this.updateOrInsertTariffs(data.response.data);
                 if (formattedData) {
-                    await GoogleSheetsService.postToAllSheets(formattedData, 'stocks_coefs');
+                    const columnsName = [
+                        [
+                            'Склад',
+                            'dt_next_box',
+                            'dt_till_max',
+                            'box_delivery_and_storage_expr',
+                            'box_delivery_base',
+                            'box_delivery_liter',
+                            'box_storage_base',
+                            'box_storage_liter',
+                            'Дата',
+                        ],
+                    ];
+                    const dataToPost = columnsName.concat(formattedData);
+                    await this.googleSheetsService.postToAllSheets(dataToPost);
                 }
             }
         } catch (error) {
             console.error('Error while fetching data:', error);
         }
-    },
+    }
+
     /**
      * Private method to update or insert tariff data into the database.
      *
-     * @private
+     * @async
      * @param {object} data - The tariff data.
      * @param {string} data.dtNextBox - The next box date.
      * @param {string} data.dtTillMax - The maximum date.
@@ -60,7 +81,6 @@ export const TariffDataService = {
     async updateOrInsertTariffs(data) {
         const { dtNextBox, dtTillMax, warehouseList } = data;
         const today = new Date().toISOString().split('T')[0];
-        console.log('First warehouse:', warehouseList[0]);
 
         const formattedDataForSheets = [];
 
@@ -105,5 +125,37 @@ export const TariffDataService = {
         }
 
         return formattedDataForSheets;
-    },
-};
+    }
+
+    async getAllData() {
+        const dataToPass = await knexDb('warehouses').select();
+        const columnsName = [
+            [
+                'Склад',
+                'dt_next_box',
+                'dt_till_max',
+                'box_delivery_and_storage_expr',
+                'box_delivery_base',
+                'box_delivery_liter',
+                'box_storage_base',
+                'box_storage_liter',
+                'Дата',
+            ],
+        ];
+        const reformattedData = dataToPass.map((item) => {
+            return [
+                item.warehouse_name,
+                item.dt_next_box,
+                item.dt_till_max,
+                item.box_delivery_and_storage_expr + '',
+                item.box_delivery_base + '',
+                item.box_delivery_liter + '',
+                item.box_storage_base + '',
+                item.box_storage_liter + '',
+                item.updated_at + '',
+            ];
+        });
+        const pastData = columnsName.concat(reformattedData);
+        await this.googleSheetsService.postToAllSheets(pastData);
+    }
+}

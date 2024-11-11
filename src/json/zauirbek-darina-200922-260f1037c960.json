@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "zauirbek-darina-200922",
+  "private_key_id": "260f1037c9602dc067a7b0f82c0e5cc94c0a3592",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCZUF1NDYXNZb+s\nsRL8vFkuNXqElLsCQtIUqSslwVZvQdZFH2uf6gIz9MFrGAK6T8sLzvFzjPoYzRV7\nVq40MkdXi3T+OIez4kIRfQmN3IJ3yewbFLQ7pMeRgd2k7LT7TmbK5XId9v8Vj8Xc\n+I2XH/Jqot9QW4JetmgkPKLDA93qt74sgwtlU6jnGKRfuMfB1Z8p2Meod2+5vjMp\nUKo2uE1pV/sf6Tgp9Ww0UQ+VV1CAy0bsftOVbmsmIzsljxsN8sqVaLNu/CgfrDnx\nA4PdS7QTqgup68VDyLhm7cpp5WzSrRTN4aXp/tQ6YQS3LQRgxxuI5EisS1nmT1rf\nHxJfv9NZAgMBAAECggEAHm2LxvIrHyPVkeGnAhAjpv8oLM4T+5PlfAJDNQAVNomb\njCZ7Rsa73zHxfV7Lk8yoYNSWqTdOn8N8QvlmI6fi7uYXtyjjDfmW4T+uuMAOCNZD\njPBkAP5oOWHL6qKsHMBnuFcnefj+kXnybDPMbjUB+NYQejNfQYr0SlTafNf0oFO+\nv9VT8S0kvTGOe51o9A5+p40oZHGmhHJGQoi3qBkQ+f3Zjq7tydMmrGIHqYgQc+JG\nPhowtPKw6MgcSPhHK2l3zxUpQ/oQcgCzGs6DMrfLPXkUUSnZyR5Iq3JNj+0dXORy\nB0b6AsAeDOne2U88z8S6C5QQli8HEpom3jSCYzMajQKBgQDHNGCmenHKkH4V+B5N\nfcn6DVCdREZFoQacNoWelLL1sUW0CQQvFI8gQ4CZ8n86wADHZE1POo8ZtepqS5ew\naMEstetSYvn12dAxL+K4V8bF9Tnji0NzXMD9EqWgJjWlwuFtNa4Ni2WPb/8AUnkx\nI//OJUuTgEZ1dhgE5gLv9JCR3wKBgQDFBoAfeHN+wdz9CD9mLmgOaF6FK9esJsEa\nCEk4m/bgCI2myoUjDHITgLGE29P4yFqqCX5lxFGw+9f1+DTICoW7Yn3nVR6gzdZs\nPEi6plk3yEPqlwcMi3MooIeFNYWsNzjFiS8uSl0G5Ba4OLtXV0d5J7j7gm3ttzkt\nOZRq2mVxxwKBgQCmQjbwe32BnTs+xskzz+rFQluoBpXIA29q7a5z/pOmsAAHFQdi\n6/vQ58XrtxMtS5ba1AIaQDuzL7uoX9MIr0WbNXJkXqtU4Cf9BYRqawhBrDxWh6MS\nI7YHAostsPZRlOdkqMrODywCnWztLehsdSlJOqNrRkKIQrolTHvjHfGTbQKBgGbx\nSIwo4R9/pzlFz+pRoOi2O3yVNbCq5wX1AlzjkI/pqClXc0ymugval+X0/cHk3Qou\nv63ob05rp6DKuLk0Vj9b7LCr1r7qDXir3sw3EjKFHoc5teMmEVtO1MATAO7EQ5Ni\nZBZpoEVzczN54Nh3r85rpMk0kr87llI83YEe7xYNAoGBALo2w922kBFGfuoCFaUh\navdIn4aRqzRwlzw1iCWS2tee7jyQqrBAUlJ72SZ7xCpE6Soj6d3kkweeK6yzBW/e\nEATbh4iAtJt30LU348H1X6h80TohNVfb9y8TuJs4AY4pEWT9zZq5nw0nL4g09HYv\n/xats1jpCgW6G+x2QAXHIYcN\n-----END PRIVATE KEY-----\n",
+  "client_email": "testtraffic@zauirbek-darina-200922.iam.gserviceaccount.com",
+  "client_id": "105336000106880938924",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/testtraffic%40zauirbek-darina-200922.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -1,21 +1,44 @@
 import { TariffDataService } from '#services/tariff-data-service.js';
+import knexDb from '#knexDB.js';
 
-/** Handles the data fetching process and allows periodic execution. */
-const DataFetcher = {
+class DataFetcher {
+    constructor() {
+        this.migrationsRun = false;
+        this.tariffDataService = new TariffDataService();
+    }
+
     /**
-     * Main method to start the data fetching process and handle errors.
+     * Main method to start the data fetching process, handle errors, and run migrations.
      *
      * @async
      */
     async start() {
         try {
-            console.log('Starting the data fetching process...');
-            await TariffDataService.fetchAndProcessTariffData();
-            console.log('Data fetching and processing completed successfully.');
+            if (!this.migrationsRun) {
+                await this.runMigration();
+                this.migrationsRun = true;
+            }
+
+            await this.tariffDataService.fetchAndProcessTariffData();
         } catch (error) {
             console.error('Error in main process:', error);
         }
-    },
+    }
+
+    /**
+     * Run the Knex migration.
+     *
+     * @async
+     */
+    async runMigration() {
+        try {
+            console.log('Running migrations...');
+            await knexDb.migrate.latest();
+            console.log('Migrations completed successfully.');
+        } catch (error) {
+            console.error('Error running migrations:', error);
+        }
+    }
 
     /**
      * Sets up a periodic task to fetch data every hour.
@@ -27,7 +50,8 @@ const DataFetcher = {
         setInterval(() => {
             this.start();
         }, intervalMs);
-    },
-};
+    }
+}
 
-DataFetcher.startPeriodicFetching();
+const dataFetcher = new DataFetcher();
+dataFetcher.startPeriodicFetching();
