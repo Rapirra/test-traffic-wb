@@ -10,8 +10,7 @@ export class TariffDataService {
      */
     constructor() {
         this.appUrl = 'https://common-api.wildberries.ru/api/v1/tariffs/box';
-        this.apiKey =
-            'eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjQxMDE2djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTc0NjA2ODAxNywiaWQiOiIwMTkyZGRlYS1mOWU2LTcxNzItODk0Ny1iMjE1Y2I5MmU5NDgiLCJpaWQiOjQ1OTExNjA5LCJvaWQiOjExMzA0NiwicyI6MTA3Mzc0MTgzMiwic2lkIjoiOTMyYzE3NmEtNTA4NS01YzZmLWJjMzMtNGU4NGNkZjU4ZDdlIiwidCI6ZmFsc2UsInVpZCI6NDU5MTE2MDl9.l2C-kGr-1YptJ5iyp_q1RYSxDOgENHXfGepnmo709g2UsGDnT90NnBt5K-nVLVH14XaEFi81dcmeZvF6qz-oxQ';
+        this.apiKey = 'e345678hjvhzx46rfviyguyvhxresxyttfyvf7675r6f5d7656d554sy';
         this.googleSheetsService = new GoogleSheetsService();
     }
     /**
